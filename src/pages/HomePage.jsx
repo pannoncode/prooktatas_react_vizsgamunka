@@ -100,7 +100,7 @@ const HomePage = () => {
           spacing={2}
           alignItems="center"
           justifyContent="center"
-          sx={{ mt: "1.5rem" }}
+          sx={{ mt: "1.5rem", mb: "7rem" }}
         >
           <Grid item xs={6} md={8}>
             <Item>
