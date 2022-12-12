@@ -30,6 +30,7 @@ import { useDispatch } from "react-redux";
 const style = {
   boxTable: {
     ml: "1rem",
+    mb: "10rem",
   },
   circularProg: {
     textAlign: "center",
