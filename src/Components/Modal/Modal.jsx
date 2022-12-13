@@ -17,6 +17,8 @@ const style = {
   boxShadow: 24,
   p: 4,
   textAlign: "center",
+  maxHeight: "90vh",
+  overflowY: "auto",
 };
 
 const BasicModal = (props) => {

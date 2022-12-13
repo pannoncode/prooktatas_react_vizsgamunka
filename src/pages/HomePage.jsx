@@ -1,9 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
+
+import titleSlice from "../store/title-slice";
+import { useDispatch } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -16,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const style = {
   box: {
     flexGrow: 1,
-    mt: "5rem",
+    mt: "7rem",
   },
   typho: {
     mt: "1.5rem",
@@ -24,6 +27,12 @@ const style = {
 };
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(titleSlice.actions.setTitle("Kezdőoldal"));
+  }, [dispatch]);
+
   return (
     <Fragment>
       <Box sx={style.box}>

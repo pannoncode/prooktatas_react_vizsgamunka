@@ -22,6 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { getAllCenterlineTypes } from "../store/centerlineTypes-actions";
 import centerlineTypes from "../store/centerlineTypes-slice";
+import titleSlice from "../store/title-slice";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -31,7 +32,7 @@ import checkLoading from "../store/checkloading-slice";
 
 const style = {
   box: {
-    "& > :not(style)": { mt: "5rem", ml: "1rem", width: "49ch" },
+    "& > :not(style)": { mt: "7rem", ml: "1rem", width: "49ch" },
   },
   boxTypo: {
     mb: "1rem",
@@ -99,6 +100,7 @@ const CreateCenterlineType = () => {
 
   useEffect(() => {
     dispatch(getAllCenterlineTypes());
+    dispatch(titleSlice.actions.setTitle("Centerline típus létrehozása"));
 
     return () => {
       dispatch(centerlineTypes.actions.clearClTypes());

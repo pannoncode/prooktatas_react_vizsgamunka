@@ -23,6 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { getAllMachineNumbersFromDb } from "../store/machineNumbers-actions";
 import machineNumberSlice from "../store/machineNumbers-slice";
+import titleSlice from "../store/title-slice";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -32,7 +33,7 @@ import checkLoading from "../store/checkloading-slice";
 
 const style = {
   box: {
-    "& > :not(style)": { mt: "5rem", ml: "1rem", width: "49ch" },
+    "& > :not(style)": { mt: "7rem", ml: "1rem", width: "49ch" },
   },
   boxTypo: {
     mb: "1rem",
@@ -103,6 +104,7 @@ const CreateMachineNumber = () => {
 
   useEffect(() => {
     dispatch(getAllMachineNumbersFromDb());
+    dispatch(titleSlice.actions.setTitle("Gépszám létrehozása"));
 
     return () => {
       dispatch(machineNumberSlice.actions.clearMachineNumbers());

@@ -33,12 +33,14 @@ import { useDispatch } from "react-redux";
 
 import { fetchCenterlineList } from "../store/centerlineList-actions";
 import centerlineListSlice from "../store/centerlineList-slice";
+import titleSlice from "../store/title-slice";
 
 import Selections from "../hooks/selections";
 
 const style = {
   formControlBox: {
     width: "100%",
+    mt: "7rem",
   },
   formControl: {
     m: "1rem",
@@ -69,6 +71,7 @@ const CenterlineList = () => {
 
   useEffect(() => {
     dispatch(fetchCenterlineList());
+    dispatch(titleSlice.actions.setTitle("Centerline listák"));
 
     return () => {
       dispatch(centerlineListSlice.actions.clearCenterlineDatas());

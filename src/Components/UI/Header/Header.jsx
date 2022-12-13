@@ -3,10 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { Box } from "@mui/system";
-import { Tabs, Tab } from "@mui/material";
+import { Tabs, Tab, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+
+import { useSelector } from "react-redux";
 
 const ElevationScroll = (props) => {
   const { children } = props;
@@ -40,6 +42,8 @@ const Header = () => {
   const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const headerTitle = useSelector((state) => state.headerTitle.title);
 
   const handleChange = (event, value) => {
     setValue(value);
@@ -81,7 +85,7 @@ const Header = () => {
     <Fragment>
       <ElevationScroll>
         <AppBar position="fixed" sx={sxStyles.header}>
-          <Toolbar disableGutters>
+          <Toolbar variant="dense" disableGutters>
             <Tabs
               sx={sxStyles.tabs}
               value={value}
@@ -157,6 +161,13 @@ const Header = () => {
                 Centerline lista létrehozása
               </MenuItem>
             </Menu>
+          </Toolbar>
+          <Divider />
+          <Toolbar
+            variant="dense"
+            sx={{ backgroundColor: "#3D4FA3", width: "100%", height: "1.5rem" }}
+          >
+            <Box sx={{ mx: "auto" }}>{headerTitle}</Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

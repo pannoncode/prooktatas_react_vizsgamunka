@@ -23,6 +23,7 @@ import machineNumberSlice from "../store/machineNumbers-slice";
 import centerlineTypes from "../store/centerlineTypes-slice";
 import centerlineListSlice from "../store/centerlineList-slice";
 import errorFeedbackSlice from "../store/errorFeedback-slice";
+import titleSlice from "../store/title-slice";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -77,6 +78,7 @@ const CreateCenterlineLists = () => {
     dispatch(fetchCenterlineList());
     dispatch(getAllMachineNumbersFromDb());
     dispatch(getAllCenterlineTypes());
+    dispatch(titleSlice.actions.setTitle("Centerline lista létrehozása"));
 
     return () => {
       dispatch(machineNumberSlice.actions.clearMachineNumbers());
@@ -174,7 +176,11 @@ const CreateCenterlineLists = () => {
 
   return (
     <Fragment>
-      <Button variant="contained" sx={{ m: "1rem" }} onClick={modalOpenHandler}>
+      <Button
+        variant="contained"
+        sx={{ m: "1rem", mt: "3rem" }}
+        onClick={modalOpenHandler}
+      >
         Lista létrehozása
       </Button>
       {succes && (

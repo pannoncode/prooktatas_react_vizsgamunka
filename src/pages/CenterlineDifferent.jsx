@@ -15,8 +15,10 @@ import Table from "../Components/Table/Table";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+
 import { fetchCenterlineDifferent } from "../store/centerlineDifferent-actions";
 import centerlineListSlice from "../store/centerlineList-slice";
+import titleSlice from "../store/title-slice";
 
 const columns = [
   {
@@ -101,7 +103,7 @@ const style = {
   },
   tableBox: {
     mb: "20rem",
-    mt: "5rem",
+    mt: "7rem",
     "& .clOut": {
       backgroundColor: "red",
       color: "white",
@@ -121,6 +123,7 @@ const CenterlineDifferent = () => {
 
   useEffect(() => {
     dispatch(fetchCenterlineDifferent());
+    dispatch(titleSlice.actions.setTitle("Centerline eltérések"));
 
     return () => {
       dispatch(centerlineListSlice.actions.clearCenterlineDifferent());
