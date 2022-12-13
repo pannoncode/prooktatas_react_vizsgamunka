@@ -86,6 +86,9 @@ const CreateCenterlineLists = () => {
       dispatch(centerlineTypes.actions.clearClTypes());
       dispatch(centerlineTypes.actions.clearAllClTypes());
       dispatch(centerlineListSlice.actions.clearCenterlineDatas());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle);
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
     };
   }, [dispatch, succes]);
 

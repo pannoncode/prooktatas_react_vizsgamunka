@@ -109,6 +109,9 @@ const CreateMachineNumber = () => {
     return () => {
       dispatch(machineNumberSlice.actions.clearMachineNumbers());
       dispatch(machineNumberSlice.actions.clearAllMachineNumbers());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle);
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
     };
   }, [dispatch, validMachineNumber]);
 

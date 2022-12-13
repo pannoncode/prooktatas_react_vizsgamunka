@@ -20,11 +20,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 
 import CenterlineTables from "../Components/Table/CenterlineTables";
+import SelectList from "../Components/UI/NativeSelect/SelectList";
 
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Button } from "@mui/material";
 
@@ -76,6 +74,9 @@ const CenterlineList = () => {
     return () => {
       dispatch(centerlineListSlice.actions.clearCenterlineDatas());
       dispatch(centerlineListSlice.actions.clearMachineNumbers());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle);
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
     };
   }, [dispatch]);
 
@@ -91,6 +92,7 @@ const CenterlineList = () => {
     setCenterlineTypes(cltypes);
     setCenterlines(selectedCenterlineData);
     setSelectedMachineNumber(machine);
+    dispatch(titleSlice.actions.setMachineNumberTitle(machine));
   };
 
   //[2]
@@ -99,51 +101,28 @@ const CenterlineList = () => {
 
     setClDatas(datasOfCl);
     setTableTitle(selectedCenterlineList);
+    dispatch(titleSlice.actions.setCenterlineTypeTitle(selectedCenterlineList));
   };
 
   return (
     <Fragment>
       <Box display="flex" sx={style.formControlBox}>
-        <FormControl sx={style.formControl}>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Gépszám
-          </InputLabel>
-          <NativeSelect
-            defaultValue={30}
-            inputProps={{
-              name: "machineNumber",
-              id: "machineNumber",
-            }}
-            onChange={typeHandler}
-          >
-            <option value={null}>---</option>
-            {machineNumbersFromRedux.map((numbers) => (
-              <option key={numbers} value={numbers}>
-                {numbers}
-              </option>
-            ))}
-          </NativeSelect>
-        </FormControl>
-        <FormControl sx={style.formControl}>
-          <InputLabel variant="standard" htmlFor="uncontrolled-native">
-            Centerline Típus
-          </InputLabel>
-          <NativeSelect
-            defaultValue={30}
-            inputProps={{
-              name: "machineType",
-              id: "machineType",
-            }}
-            onChange={(event) => setSelectedCenterlineList(event.target.value)}
-          >
-            <option value={null}>---</option>
-            {centerlineTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </NativeSelect>
-        </FormControl>
+        <SelectList
+          data={machineNumbersFromRedux}
+          variant="standard"
+          title="Gépszám"
+          name="machineNumber"
+          id="machineNumber"
+          onChange={typeHandler}
+        />
+        <SelectList
+          data={centerlineTypes}
+          variant="standard"
+          title="Centerline típus"
+          name="machineType"
+          id="machineType"
+          onChange={(event) => setSelectedCenterlineList(event.target.value)}
+        />
         <Box sx={style.buttonBox}>
           <Button variant="contained" onClick={selectedListHandler}>
             Keresés

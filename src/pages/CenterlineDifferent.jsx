@@ -127,6 +127,9 @@ const CenterlineDifferent = () => {
 
     return () => {
       dispatch(centerlineListSlice.actions.clearCenterlineDifferent());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle);
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
     };
   }, [dispatch]);
 

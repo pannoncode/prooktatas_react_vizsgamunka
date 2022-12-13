@@ -105,6 +105,9 @@ const CreateCenterlineType = () => {
     return () => {
       dispatch(centerlineTypes.actions.clearClTypes());
       dispatch(centerlineTypes.actions.clearAllClTypes());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle);
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
     };
   }, [dispatch, validCltype]);
 

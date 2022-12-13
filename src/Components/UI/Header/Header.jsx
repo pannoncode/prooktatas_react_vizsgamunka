@@ -44,6 +44,12 @@ const Header = () => {
   const open = Boolean(anchorEl);
 
   const headerTitle = useSelector((state) => state.headerTitle.title);
+  const machineTitle = useSelector(
+    (state) => state.headerTitle.machineNumberTitle
+  );
+  const clTypeTitle = useSelector(
+    (state) => state.headerTitle.centerlineTypeTitle
+  );
 
   const handleChange = (event, value) => {
     setValue(value);
@@ -167,7 +173,13 @@ const Header = () => {
             variant="dense"
             sx={{ backgroundColor: "#3D4FA3", width: "100%", height: "1.5rem" }}
           >
-            <Box sx={{ mx: "auto" }}>{headerTitle}</Box>
+            <Box sx={{ mx: "auto" }}>
+              {headerTitle}
+              {"  "}
+              <b>{machineTitle ? machineTitle : ""}</b>
+              {"  "}
+              <b>{clTypeTitle ? clTypeTitle : ""}</b>
+            </Box>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
