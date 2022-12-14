@@ -54,6 +54,24 @@ const CreateCenterlineLists = () => {
   const clTypes = useSelector((state) => state.centerlineTypes.clTypes);
   const isLoading = useSelector((state) => state.checkLoading.loading);
 
+  useEffect(() => {
+    dispatch(fetchCenterlineList());
+    dispatch(getAllMachineNumbersFromDb());
+    dispatch(getAllCenterlineTypes());
+    dispatch(titleSlice.actions.setTitle("Centerline lista létrehozása"));
+
+    return () => {
+      dispatch(machineNumberSlice.actions.clearMachineNumbers());
+      dispatch(machineNumberSlice.actions.clearAllMachineNumbers());
+      dispatch(centerlineTypes.actions.clearClTypes());
+      dispatch(centerlineTypes.actions.clearAllClTypes());
+      dispatch(centerlineListSlice.actions.clearCenterlineDatas());
+      dispatch(titleSlice.actions.clearTitle());
+      dispatch(titleSlice.actions.clearMachineNumberTitle());
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle());
+    };
+  }, [dispatch, succes]);
+
   const modalOpenHandler = () => {
     setOpen(true);
   };
@@ -73,24 +91,6 @@ const CreateCenterlineLists = () => {
       }, 2000);
     }
   };
-
-  useEffect(() => {
-    dispatch(fetchCenterlineList());
-    dispatch(getAllMachineNumbersFromDb());
-    dispatch(getAllCenterlineTypes());
-    dispatch(titleSlice.actions.setTitle("Centerline lista létrehozása"));
-
-    return () => {
-      dispatch(machineNumberSlice.actions.clearMachineNumbers());
-      dispatch(machineNumberSlice.actions.clearAllMachineNumbers());
-      dispatch(centerlineTypes.actions.clearClTypes());
-      dispatch(centerlineTypes.actions.clearAllClTypes());
-      dispatch(centerlineListSlice.actions.clearCenterlineDatas());
-      dispatch(titleSlice.actions.clearTitle);
-      dispatch(titleSlice.actions.clearMachineNumberTitle);
-      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
-    };
-  }, [dispatch, succes]);
 
   const columns = [
     {

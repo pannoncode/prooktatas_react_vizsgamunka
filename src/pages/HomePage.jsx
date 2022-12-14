@@ -33,9 +33,9 @@ const HomePage = () => {
     dispatch(titleSlice.actions.setTitle("Kezdőoldal"));
 
     return () => {
-      dispatch(titleSlice.actions.clearTitle);
-      dispatch(titleSlice.actions.clearMachineNumberTitle);
-      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
+      dispatch(titleSlice.actions.clearTitle());
+      dispatch(titleSlice.actions.clearMachineNumberTitle());
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle());
     };
   }, [dispatch]);
 

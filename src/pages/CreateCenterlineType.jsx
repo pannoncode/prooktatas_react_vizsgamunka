@@ -60,6 +60,19 @@ const CreateCenterlineType = () => {
   const allTypes = useSelector((state) => state.centerlineTypes.clTypes);
   const allClType = useSelector((state) => state.centerlineTypes.clAllTypes);
 
+  useEffect(() => {
+    dispatch(getAllCenterlineTypes());
+    dispatch(titleSlice.actions.setTitle("Centerline típus létrehozása"));
+
+    return () => {
+      dispatch(centerlineTypes.actions.clearClTypes());
+      dispatch(centerlineTypes.actions.clearAllClTypes());
+      dispatch(titleSlice.actions.clearTitle());
+      dispatch(titleSlice.actions.clearMachineNumberTitle());
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle());
+    };
+  }, [dispatch, validCltype]);
+
   const sendClType = () => {
     const inputContent = inputClType.current.value.trim();
     const invalid = inputContent.match(/[.*+?<>^${}()|[\]\\]/g, "\\$&");
@@ -97,19 +110,6 @@ const CreateCenterlineType = () => {
     }, 2000);
     inputClType.current.value = "";
   };
-
-  useEffect(() => {
-    dispatch(getAllCenterlineTypes());
-    dispatch(titleSlice.actions.setTitle("Centerline típus létrehozása"));
-
-    return () => {
-      dispatch(centerlineTypes.actions.clearClTypes());
-      dispatch(centerlineTypes.actions.clearAllClTypes());
-      dispatch(titleSlice.actions.clearTitle);
-      dispatch(titleSlice.actions.clearMachineNumberTitle);
-      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
-    };
-  }, [dispatch, validCltype]);
 
   const deleteIconHandler = (event, row) => {
     setDeleteRow(true);

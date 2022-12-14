@@ -67,6 +67,19 @@ const CreateMachineNumber = () => {
 
   const errorFeedback = useSelector((state) => state.checkLoading.error);
 
+  useEffect(() => {
+    dispatch(getAllMachineNumbersFromDb());
+    dispatch(titleSlice.actions.setTitle("Gépszám létrehozása"));
+
+    return () => {
+      dispatch(machineNumberSlice.actions.clearMachineNumbers());
+      dispatch(machineNumberSlice.actions.clearAllMachineNumbers());
+      dispatch(titleSlice.actions.clearTitle);
+      dispatch(titleSlice.actions.clearMachineNumberTitle());
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle());
+    };
+  }, [dispatch, validMachineNumber]);
+
   const sendMachineNumber = () => {
     const inputNumber = parseInt(inputMachineNumber.current.value.trim());
     if (isNaN(inputNumber) || inputNumber === 0) {
@@ -101,19 +114,6 @@ const CreateMachineNumber = () => {
     }, 2000);
     inputMachineNumber.current.value = "";
   };
-
-  useEffect(() => {
-    dispatch(getAllMachineNumbersFromDb());
-    dispatch(titleSlice.actions.setTitle("Gépszám létrehozása"));
-
-    return () => {
-      dispatch(machineNumberSlice.actions.clearMachineNumbers());
-      dispatch(machineNumberSlice.actions.clearAllMachineNumbers());
-      dispatch(titleSlice.actions.clearTitle);
-      dispatch(titleSlice.actions.clearMachineNumberTitle);
-      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
-    };
-  }, [dispatch, validMachineNumber]);
 
   const deleteIconHandler = (event, row) => {
     setDeleteRow(true);

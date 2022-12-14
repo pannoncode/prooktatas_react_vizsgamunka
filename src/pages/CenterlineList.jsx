@@ -74,9 +74,9 @@ const CenterlineList = () => {
     return () => {
       dispatch(centerlineListSlice.actions.clearCenterlineDatas());
       dispatch(centerlineListSlice.actions.clearMachineNumbers());
-      dispatch(titleSlice.actions.clearTitle);
-      dispatch(titleSlice.actions.clearMachineNumberTitle);
-      dispatch(titleSlice.actions.clearCenterlineTypeTitle);
+      dispatch(titleSlice.actions.clearTitle());
+      dispatch(titleSlice.actions.clearMachineNumberTitle());
+      dispatch(titleSlice.actions.clearCenterlineTypeTitle());
     };
   }, [dispatch]);
 
