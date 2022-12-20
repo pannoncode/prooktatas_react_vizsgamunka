@@ -88,11 +88,25 @@ const columns = [
     align: "center",
   },
   {
-    field: "actions",
-    headerName: "Akció",
+    field: "diffName",
+    headerName: "Kitöltő neve",
     headerClassName: "headerStyle",
     width: 110,
-    editable: true,
+    align: "center",
+  },
+  {
+    field: "reason",
+    headerName: "Eltérés oka",
+    headerClassName: "headerStyle",
+    width: 500,
+    align: "left",
+  },
+  {
+    field: "sku",
+    headerName: "SKU",
+    headerClassName: "headerStyle",
+    width: 110,
+    align: "center",
   },
 ];
 
@@ -139,6 +153,10 @@ const CenterlineDifferent = () => {
 
   const isLoading = useSelector((state) => state.checkLoading.loading);
 
+  console.log(centerlineDifferentFromRedux);
+
+  //hibára fut még -> valahogy ki kell gyűjteni jól az adatokat amit bele lehet verni
+  //a táblázatba. Objektumban 2 objektumból kell kizabálni a motyót
   const row = centerlineDifferentFromRedux.map((row, id) => ({
     key: id,
     id: id + 1,
@@ -152,6 +170,9 @@ const CenterlineDifferent = () => {
     checkedValue: row.checkedValue,
     measure: row.measure,
     valid: row.validate,
+    diffName: row.name,
+    reason: row.reason,
+    sku: row.sku,
   }));
 
   return (

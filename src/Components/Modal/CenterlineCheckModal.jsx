@@ -25,9 +25,14 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 import BasicModal from "./Modal";
+import CenterlineDeviationModal from "./CenterlineDeviationModal";
 import ErrorModal from "./ErrorModal";
 
 import SendingData from "../../hooks/sendCheckedClData";
+
+import validationSlice from "../../store/validation-slice";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const componentStyle = {
   typhografTitle: {
@@ -56,9 +61,12 @@ const CenterlineCheckModal = (props) => {
   const inputData = useRef(); //[2]
   const portalElement = document.getElementById("modal-root"); //[3]
 
-  const { postValidateData: sendData } = SendingData(); //[4]
+  const { validateData: sendData } = SendingData(); //[4]
 
   let modalCenterlineDatas = {}; //[5]
+
+  const dispatch = useDispatch();
+  const validation = useSelector((state) => state.validation.validation);
 
   //[6]
   for (let i = 0; i < props.onData.length; i++) {
@@ -93,9 +101,17 @@ const CenterlineCheckModal = (props) => {
     //[7.3]
     sendData(inputClValue, modalCenterlineDatas, props.machineNumber);
 
-    props.onClose();
+    // if (validation) {
+    //   props.onClose();
+    //   props.deviation();
+    //   return;
+    // }
 
+    //postValidData();
+    props.onClose();
     props.onCheck(error);
+    props.deviation();
+    dispatch(validationSlice.actions.sendCheckTrueHandler());
   };
 
   return (
@@ -155,6 +171,7 @@ const CenterlineCheckModal = (props) => {
         </BasicModal>
       )}
       {error && <ErrorModal error={error} open={props.open} />}
+      {!validation && <CenterlineDeviationModal />}
     </Fragment>
   );
 };

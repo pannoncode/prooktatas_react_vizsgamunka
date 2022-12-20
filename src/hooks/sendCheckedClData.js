@@ -8,15 +8,15 @@ import { postData } from "../store/postCenterlineData-actions";
 import TimeStamp from "./timestamp";
 import CenterlineValidation from "./centerlineValueValidation";
 
+import validationSlice from "../store/validation-slice";
+import { useDispatch } from "react-redux";
+
 const SendingData = () => {
   const { targetValidation, minMaxValidation } = CenterlineValidation();
+  const dispatch = useDispatch();
   let validation;
 
-  const postValidateData = (
-    inputClValue,
-    modalCenterlineDatas,
-    machineNumber
-  ) => {
+  const validateData = (inputClValue, modalCenterlineDatas, machineNumber) => {
     if (
       modalCenterlineDatas.min === null &&
       modalCenterlineDatas.max === null
@@ -38,16 +38,22 @@ const SendingData = () => {
     modalCenterlineDatas.machineNumber = machineNumber;
     modalCenterlineDatas.validate = validation;
 
+    console.log(modalCenterlineDatas);
+    dispatch(validationSlice.actions.getPostData(modalCenterlineDatas));
+  };
+
+  const postingValidatedData = (data) => {
+    console.log("most postolok");
     postData(
       "https://projectcenterlines-default-rtdb.europe-west1.firebasedatabase.app/centerlinedifferent.json/",
       "POST",
       {
-        modalCenterlineDatas,
+        data,
       }
     );
   };
 
-  return { postValidateData };
+  return { validateData, postingValidatedData };
 };
 
 export default SendingData;

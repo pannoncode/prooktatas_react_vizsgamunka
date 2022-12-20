@@ -8,7 +8,12 @@
  *  - ellenőrzés után az eredményeket továbbküldi
  */
 
+import { useDispatch } from "react-redux";
+import validationSlice from "../store/validation-slice";
+
 const CenterlineValidation = () => {
+  const dispatch = useDispatch();
+
   let targets = {
     target: "OK",
     outTarget: "NOK",
@@ -17,16 +22,20 @@ const CenterlineValidation = () => {
 
   const targetValidation = (clvalue, cltarget) => {
     if (clvalue >= cltarget && clvalue <= cltarget) {
+      dispatch(validationSlice.actions.validationOk());
       return (result = targets.target);
     } else {
+      dispatch(validationSlice.actions.validationNok());
       return (result = targets.outTarget);
     }
   };
 
   const minMaxValidation = (min, max, clvalue) => {
     if (clvalue >= min && clvalue <= max) {
+      dispatch(validationSlice.actions.validationOk());
       return (result = targets.target);
     } else {
+      dispatch(validationSlice.actions.validationNok());
       return (result = targets.outTarget);
     }
   };

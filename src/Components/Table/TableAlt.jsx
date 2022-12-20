@@ -13,7 +13,7 @@
  * [6] - hiba esetén kezeli a [3] található useState elemet
  */
 
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -25,8 +25,14 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 
 import CenterlineCheckModal from "../Modal/CenterlineCheckModal";
-
+import CenterlineDeviationModal from "../Modal/CenterlineDeviationModal";
 import Success from "../UI/Success/Success";
+
+import SendingData from "../../hooks/sendCheckedClData";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import validationSlice from "../../store/validation-slice";
 
 const Div = styled("div")(({ theme }) => ({
   ...theme.typography.button,
@@ -62,6 +68,14 @@ const TableAlt = (props) => {
   const [open, setOpen] = useState(false); //[1]
   const [selectedCenterline, setSelectedCenterline] = useState(); //[2]
   const [clCheckOk, setClCheckOk] = useState(false); //[3]
+  const [deviationOpen, setDeviationOpen] = useState(false);
+
+  const { postingValidatedData } = SendingData();
+
+  const validation = useSelector((state) => state.validation.validation);
+  const postDataResults = useSelector((state) => state.validation.postData);
+  const sendCheckHandler = useSelector((state) => state.validation.sendCheck);
+  const dispatch = useDispatch();
 
   const columns = props.columns;
   const rows = props.rows;
@@ -96,6 +110,22 @@ const TableAlt = (props) => {
     }
   };
 
+  const deviatonModalHandler = () => {
+    setDeviationOpen(true);
+  };
+
+  const deviationModalCloseHandler = () => {
+    setDeviationOpen(false);
+  };
+
+  useEffect(() => {
+    if (validation) {
+      postingValidatedData(postDataResults);
+      dispatch(validationSlice.actions.sendCheckFalseHandler());
+      dispatch(validationSlice.actions.clearPostData());
+    }
+  }, [sendCheckHandler]);
+
   return (
     <Fragment>
       {open && (
@@ -105,6 +135,13 @@ const TableAlt = (props) => {
           onData={selectedCenterline}
           machineNumber={props.machineNumber}
           onCheck={checkedOkHandler}
+          deviation={deviatonModalHandler}
+        />
+      )}
+      {!validation && (
+        <CenterlineDeviationModal
+          open={deviationOpen}
+          onClose={deviationModalCloseHandler}
         />
       )}
       {centerlineDatas && (

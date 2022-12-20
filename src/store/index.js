@@ -5,6 +5,7 @@ import machineNumberSlice from "./machineNumbers-slice";
 import centerlineTypes from "./centerlineTypes-slice";
 import errorFeedbackSlice from "./errorFeedback-slice";
 import titleSlice from "./title-slice";
+import validationSlice from "./validation-slice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     centerlineTypes: centerlineTypes.reducer,
     errorFeedback: errorFeedbackSlice.reducer,
     headerTitle: titleSlice.reducer,
+    validation: validationSlice.reducer,
   },
 });
 
