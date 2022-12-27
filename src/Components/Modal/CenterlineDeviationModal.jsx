@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 
 import BasicModal from "./Modal";
 import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/material";
 
 import SendingData from "../../hooks/sendCheckedClData";
@@ -11,8 +11,10 @@ import centerlineDeviationValidation from "../../hooks/centerlineDeviationValida
 import validationSlice from "../../store/validation-slice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const CenterlineDeviationModal = (props) => {
+  const [error, setError] = useState(false);
   const portalElement = document.getElementById("modal-root");
   const nameRef = useRef();
   const skuRef = useRef();
@@ -32,8 +34,7 @@ const CenterlineDeviationModal = (props) => {
     const reasonDev = reasonDevRef.current.value;
 
     if (!centerlineDeviationValidation(checkerName, sku, reasonDev)) {
-      //csinálni kell egy hiba kezelést, hogy jelezze ha valami nincs kitöltve
-      console.log("Hiba");
+      setError(true);
       return;
     }
 
@@ -67,10 +68,17 @@ const CenterlineDeviationModal = (props) => {
         noValidate
         autoComplete="off"
       >
+        <Box sx={{ mb: 1 }}>
+          <Typography variant="h5">Centerline eltérés riport</Typography>
+          <Typography variant="caption" sx={{ color: "red" }}>
+            * minden mező kitöltése kötelező
+          </Typography>
+        </Box>
         <TextField
           id="name"
           label="Név"
           variant="outlined"
+          error={error}
           inputRef={nameRef}
         />
         <TextField
@@ -78,11 +86,13 @@ const CenterlineDeviationModal = (props) => {
           label="SKU"
           type="number"
           variant="outlined"
+          error={error}
           inputRef={skuRef}
         />
         <TextField
           id="dev-reason"
           label="Eltérés oka"
+          error={error}
           multiline
           rows={10}
           sx={{ width: "300px" }}

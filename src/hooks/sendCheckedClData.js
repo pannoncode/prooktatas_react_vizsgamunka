@@ -38,7 +38,6 @@ const SendingData = () => {
     modalCenterlineDatas.machineNumber = machineNumber;
     modalCenterlineDatas.validate = validation;
 
-    console.log(modalCenterlineDatas);
     dispatch(validationSlice.actions.getPostData(modalCenterlineDatas));
   };
 

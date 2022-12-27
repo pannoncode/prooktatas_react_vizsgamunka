@@ -56,7 +56,7 @@ const columns = [
     field: "target",
     headerName: "Cél",
     headerClassName: "headerStyle",
-    width: 100,
+    width: 110,
     align: "center",
   },
   {
@@ -82,7 +82,7 @@ const columns = [
   },
   {
     field: "valid",
-    headerName: "Eltérés?",
+    headerName: "CL OK?",
     headerClassName: "headerStyle",
     width: 110,
     align: "center",
@@ -91,7 +91,7 @@ const columns = [
     field: "diffName",
     headerName: "Kitöltő neve",
     headerClassName: "headerStyle",
-    width: 110,
+    width: 150,
     align: "center",
   },
   {
@@ -153,10 +153,6 @@ const CenterlineDifferent = () => {
 
   const isLoading = useSelector((state) => state.checkLoading.loading);
 
-  console.log(centerlineDifferentFromRedux);
-
-  //hibára fut még -> valahogy ki kell gyűjteni jól az adatokat amit bele lehet verni
-  //a táblázatba. Objektumban 2 objektumból kell kizabálni a motyót
   const row = centerlineDifferentFromRedux.map((row, id) => ({
     key: id,
     id: id + 1,
