@@ -5,6 +5,7 @@
  *   - A bevitt adatok egy táblázat segítségével jelenítődnek meg az oldalon
  *   - (később ez a táblázat CRUD táblázattá kell válnia)
  */
+
 import React, { Fragment, useState, useEffect } from "react";
 
 import { Button } from "@mui/material";
@@ -27,6 +28,7 @@ import titleSlice from "../store/title-slice";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import ExportData from "../Components/ExportData/ExportData";
 
 const style = {
   boxTable: {
@@ -179,13 +181,21 @@ const CreateCenterlineLists = () => {
 
   return (
     <Fragment>
-      <Button
-        variant="contained"
-        sx={{ m: "1rem", mt: "3rem" }}
-        onClick={modalOpenHandler}
-      >
-        Lista létrehozása
-      </Button>
+      <Box sx={{ display: "flex" }}>
+        <Button
+          variant="contained"
+          sx={{ m: "1rem", mt: "3rem" }}
+          onClick={modalOpenHandler}
+        >
+          Lista létrehozása
+        </Button>
+        <ExportData
+          exportData={row}
+          content={"Centerline listák letöltése"}
+          fileName={"cllist"}
+        />
+      </Box>
+
       {succes && (
         <Success severity="success" content="Sikeres lista lértehozás" />
       )}

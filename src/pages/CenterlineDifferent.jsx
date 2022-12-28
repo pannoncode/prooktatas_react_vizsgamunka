@@ -3,7 +3,6 @@
  *   - A Centerline eltérések menüpont
  *   - Itt jelenítődnek meg a centerline ellenőrzéskor bevitt adatok
  *   - Egy táblázat jeleníti meg az adatbázisból az adatokat
- *   - (későbbiekben itt az akció fület szerkeszhetővé kell tenni)
  */
 
 import React, { Fragment, useEffect } from "react";
@@ -19,6 +18,8 @@ import { useDispatch } from "react-redux";
 import { fetchCenterlineDifferent } from "../store/centerlineDifferent-actions";
 import centerlineListSlice from "../store/centerlineList-slice";
 import titleSlice from "../store/title-slice";
+
+import ExportData from "../Components/ExportData/ExportData";
 
 const columns = [
   {
@@ -117,7 +118,7 @@ const style = {
   },
   tableBox: {
     mb: "20rem",
-    mt: "7rem",
+
     "& .clOut": {
       backgroundColor: "red",
       color: "white",
@@ -173,6 +174,12 @@ const CenterlineDifferent = () => {
 
   return (
     <Fragment>
+      <ExportData
+        exportData={row}
+        content={"Eltérések letöltése"}
+        fileName={"cldifferent"}
+      />
+
       {isLoading && (
         <Box sx={style.circularProg}>
           <CircularProgress size={60} />
