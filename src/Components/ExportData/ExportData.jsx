@@ -1,21 +1,21 @@
 import React from "react";
 
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import Box from "@mui/material/Box";
-import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import DownloadIcon from "@mui/icons-material/Download";
 
 import * as XLSX from "xlsx";
 
 const style = {
   captionContent: {
-    ml: "1rem",
+    // ml: "1rem",
   },
   saveIcon: {
-    mt: "3rem",
-    ml: "1rem",
-    "&:hover": {
-      cursor: "pointer",
-    },
+    //   mt: "3rem",
+    //   ml: "1rem",
+    //   "&:hover": {
+    //     cursor: "pointer",
+    //},
   },
 };
 
@@ -28,15 +28,22 @@ const ExportData = (props) => {
   };
 
   return (
-    <Box>
-      <Typography variant="overline" sx={style.captionContent}>
+    <Box sx={{ m: "1rem" }}>
+      <Button
+        variant="contained"
+        endIcon={<DownloadIcon />}
+        onClick={exportExcelHandler}
+      >
         {props.content}
-      </Typography>
-      <SaveAltIcon
+        {/* <Typography variant="overline" sx={style.captionContent}>
+        {props.content}
+      </Typography> */}
+        {/* <DownloadIcon
         color="primary"
         sx={style.saveIcon}
         onClick={exportExcelHandler}
-      />
+      /> */}
+      </Button>
     </Box>
   );
 };

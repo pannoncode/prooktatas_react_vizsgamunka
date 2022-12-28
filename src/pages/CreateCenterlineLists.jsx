@@ -33,7 +33,7 @@ import ExportData from "../Components/ExportData/ExportData";
 const style = {
   boxTable: {
     ml: "1rem",
-    mb: "10rem",
+    mb: "15rem",
   },
   circularProg: {
     textAlign: "center",
@@ -181,10 +181,12 @@ const CreateCenterlineLists = () => {
 
   return (
     <Fragment>
-      <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{ display: "flex", mt: "6rem", justifyContent: "space-between" }}
+      >
         <Button
           variant="contained"
-          sx={{ m: "1rem", mt: "3rem" }}
+          sx={{ m: "1rem" }}
           onClick={modalOpenHandler}
         >
           Lista létrehozása

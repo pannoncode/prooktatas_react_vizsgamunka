@@ -174,11 +174,13 @@ const CenterlineDifferent = () => {
 
   return (
     <Fragment>
-      <ExportData
-        exportData={row}
-        content={"Eltérések letöltése"}
-        fileName={"cldifferent"}
-      />
+      <Box sx={{ mt: "7rem" }}>
+        <ExportData
+          exportData={row}
+          content={"Eltérések letöltése"}
+          fileName={"cldifferent"}
+        />
+      </Box>
 
       {isLoading && (
         <Box sx={style.circularProg}>
